@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Master Calculation App</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between p-3 select-none">
+
+    <!-- Top Header -->
+    <header class="w-full max-w-md mx-auto bg-slate-900 border border-indigo-500/30 rounded-2xl p-3 shadow-xl flex justify-between items-center mb-3">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center text-white text-sm shadow">
+                <i class="fa-solid fa-calculator"></i>
+            </div>
+            <div>
+                <h1 class="text-xs font-bold text-white uppercase tracking-wider">Master Calculation</h1>
+                <p class="text-[9px] text-slate-400">All-in-One Pro Tool</p>
+            </div>
+        </div>
+        <span class="text-[9px] bg-indigo-950 text-indigo-300 border border-indigo-500/40 px-2 py-1 rounded-lg font-bold">PRO V1</span>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="w-full max-w-md mx-auto grid grid-cols-3 gap-1.5 mb-3" role="tablist" aria-label="Calculator tabs">
+        <button type="button" onclick="switchTab('calc')" id="tabCalcBtn" aria-controls="sectionCalc" aria-selected="true" class="py-2 bg-indigo-600 text-white font-bold text-xs rounded-xl shadow cursor-pointer transition">
+            <i class="fa-solid fa-square-root-variable mr-1"></i> Scientific
+        </button>
+        <button type="button" onclick="switchTab('age')" id="tabAgeBtn" aria-controls="sectionAge" aria-selected="false" class="py-2 bg-slate-900 border border-slate-800 text-slate-400 font-bold text-xs rounded-xl cursor-pointer transition">
+            <i class="fa-solid fa-cake-candles mr-1"></i> Age Calc
+        </button>
+        <button type="button" onclick="switchTab('curr')" id="tabCurrBtn" aria-controls="sectionCurr" aria-selected="false" class="py-2 bg-slate-900 border border-slate-800 text-slate-400 font-bold text-xs rounded-xl cursor-pointer transition">
+            <i class="fa-solid fa-earth-americas mr-1"></i> Currency
+        </button>
+    </nav>
+
+    <!-- Main Container Area -->
+    <main class="w-full max-w-md mx-auto bg-slate-900 border border-slate-800 rounded-3xl p-4 shadow-2xl flex-grow flex flex-col justify-between space-y-4">
+
+        <!-- TAB 1: SCIENTIFIC CALCULATOR -->
+        <div id="sectionCalc" class="space-y-3" role="tabpanel">
+            <div class="bg-slate-950 border border-slate-800 p-3 rounded-2xl text-right" aria-live="polite">
+                <div id="calcScreen" class="text-2xl font-extrabold text-white tracking-wider overflow-x-auto">0</div>
+            </div>
+            <div class="grid grid-cols-4 gap-2 text-xs font-bold">
+                <button type="button" onclick="appendVal('sin(')" class="p-3 bg-slate-800 border border-slate-700 rounded-xl text-indigo-400 active:bg-slate-700 cursor-pointer">sin</button>
+                <button type="button" onclick="appendVal('cos(')" class="p-3 bg-slate-800 border border-slate-700 rounded-xl text-indigo-400 active:bg-slate-700 cursor-pointer">cos</button>
+                <button type="button" onclick="appendVal('tan(')" class="p-3 bg-slate-800 border border-slate-700 rounded-xl text-indigo-400 active:bg-slate-700 cursor-pointer">tan</button>
+                <button type="button" onclick="clearCalc()" class="p-3 bg-rose-950/60 border border-rose-800/50 rounded-xl text-rose-400 cursor-pointer">AC</button>
+
+                <button type="button" onclick="appendVal('7')" class="p-3 bg-slate-800 rounded-xl cursor-pointer">7</button>
+                <button type="button" onclick="appendVal('8')" class="p-3 bg-slate-800 rounded-xl cursor-pointer">8</button>
+                <button type="button" onclick="appendVal('9')" class="p-3 bg-slate-800 rounded-xl cursor-pointer">9</button>
+                <button type="button" onclick="appendVal('/')" class="p-3 bg-indigo-950 text-indigo-300 rounded-xl cursor-pointer">÷</button>
+
+                <button type="button" onclick="appendVal('4')" class="p-3 bg-slate-800 rounded-xl cursor-pointer">4</button>
+                <button type="button" onclick="appendVal('5')" class="p-3 bg-slate-800 rounded-xl cursor-pointer">5</button>
+                <button type="button" onclick="appendVal('6')" class="p-3 bg-slate-800 rounded-xl cursor-pointer">6</button>
+                <button type="button" onclick="appendVal('*')" class="p-3 bg-indigo-950 text-indigo-300 rounded-xl cursor-pointer">×</button>
+
+                <button type="button" onclick="appendVal('1')" class="p-3 bg-slate-800 rounded-xl cursor-pointer">1</button>
+                <button type="button" onclick="appendVal('2')" class="p-3 bg-slate-800 rounded-xl cursor-pointer">2</button>
+                <button type="button" onclick="appendVal('3')" class="p-3 bg-slate-800 rounded-xl cursor-pointer">3</button>
+                <button type="button" onclick="appendVal('-')" class="p-3 bg-indigo-950 text-indigo-300 rounded-xl cursor-pointer">-</button>
+
+                <button type="button" onclick="appendVal('0')" class="p-3 bg-slate-800 rounded-xl cursor-pointer">0</button>
+                <button type="button" onclick="appendVal('.')" class="p-3 bg-slate-800 rounded-xl cursor-pointer">.</button>
+                <button type="button" onclick="calculateResult()" class="p-3 bg-emerald-600 rounded-xl text-white col-span-1 cursor-pointer">=</button>
+                <button type="button" onclick="appendVal('+')" class="p-3 bg-indigo-950 text-indigo-300 rounded-xl cursor-pointer">+</button>
+            </div>
+            <div class="flex gap-2 mt-2 text-xs">
+                <button type="button" onclick="backspace()" class="flex-1 p-2 bg-slate-800 rounded-xl">⌫ Backspace</button>
+                <button type="button" onclick="appendVal('(')" class="p-2 bg-slate-800 rounded-xl">(</button>
+                <button type="button" onclick="appendVal(')')" class="p-2 bg-slate-800 rounded-xl">)</button>
+            </div>
+        </div>
+
+        <!-- TAB 2: AGE CALCULATOR -->
+        <div id="sectionAge" class="hidden space-y-3" role="tabpanel" aria-hidden="true">
+            <h2 class="text-xs font-bold text-indigo-400 uppercase tracking-wide">Age & Time Calculator</h2>
+            <div class="space-y-2">
+                <label for="dobInput" class="text-[10px] text-slate-400 block">Select Date of Birth:</label>
+                <input type="date" id="dobInput" class="w-full bg-slate-950 border border-slate-800 p-3 rounded-xl text-xs text-slate-200 focus:outline-none" aria-label="Date of birth">
+                <button type="button" onclick="calculateAge()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl shadow cursor-pointer transition">
+                    Calculate Exact Age
+                </button>
+            </div>
+            <div id="ageResultBox" class="hidden bg-slate-950 border border-slate-800 p-3 rounded-xl text-center space-y-1" aria-live="polite">
+                <span class="text-[10px] text-slate-400">Your Exact Age:</span>
+                <h3 id="ageOutput" class="text-sm font-extrabold text-emerald-400">--</h3>
+            </div>
+        </div>
+
+        <!-- TAB 3: LIVE CURRENCY COMPARISON -->
+        <div id="sectionCurr" class="hidden space-y-3" role="tabpanel" aria-hidden="true">
+            <h2 class="text-xs font-bold text-indigo-400 uppercase tracking-wide">Global Currency Tracker</h2>
+            <p class="text-[10px] text-slate-400">Live conversion rates against Indian Rupee (INR):</p>
+            <div class="space-y-2">
+                <div class="bg-slate-950 border border-slate-800 p-3 rounded-xl flex justify-between items-center text-xs">
+                    <span>🇺🇸 1 US Dollar (USD)</span>
+                    <span id="rateUSD" class="font-bold text-emerald-400">Loading...</span>
+                </div>
+                <div class="bg-slate-950 border border-slate-800 p-3 rounded-xl flex justify-between items-center text-xs">
+                    <span>🇪🇺 1 Euro (EUR)</span>
+                    <span id="rateEUR" class="font-bold text-emerald-400">Loading...</span>
+                </div>
+                <div class="bg-slate-950 border border-slate-800 p-3 rounded-xl flex justify-between items-center text-xs">
+                    <span>🇬🇧 1 British Pound (GBP)</span>
+                    <span id="rateGBP" class="font-bold text-emerald-400">Loading...</span>
+                </div>
+            </div>
+            <button type="button" onclick="fetchLiveRates()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl cursor-pointer transition">
+                <i class="fa-solid fa-rotate mr-1"></i> Refresh Live Rates
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-md mx-auto text-center text-[9px] text-slate-500 mt-2">
+        © Master Calculation App • Built for S.S.K
+    </footer>
+
+    <!-- Script Logic -->
+    <script>
+        function switchTab(tab) {
+            // hide all
+            document.getElementById('sectionCalc').classList.add('hidden');
+            document.getElementById('sectionAge').classList.add('hidden');
+            document.getElementById('sectionCurr').classList.add('hidden');
+
+            // reset aria-selected
+            document.getElementById('tabCalcBtn').className = "py-2 bg-slate-900 border border-slate-800 text-slate-400 font-bold text-xs rounded-xl cursor-pointer transition";
+            document.getElementById('tabCalcBtn').setAttribute('aria-selected','false');
+            document.getElementById('tabCalcBtn').setAttribute('aria-controls','sectionCalc');
+            document.getElementById('tabAgeBtn').className = "py-2 bg-slate-900 border border-slate-800 text-slate-400 font-bold text-xs rounded-xl cursor-pointer transition";
+            document.getElementById('tabAgeBtn').setAttribute('aria-selected','false');
+            document.getElementById('tabAgeBtn').setAttribute('aria-controls','sectionAge');
+            document.getElementById('tabCurrBtn').className = "py-2 bg-slate-900 border border-slate-800 text-slate-400 font-bold text-xs rounded-xl cursor-pointer transition";
+            document.getElementById('tabCurrBtn').setAttribute('aria-selected','false');
+            document.getElementById('tabCurrBtn').setAttribute('aria-controls','sectionCurr');
+
+            if(tab === 'calc') {
+                document.getElementById('sectionCalc').classList.remove('hidden');
+                document.getElementById('tabCalcBtn').className = "py-2 bg-indigo-600 text-white font-bold text-xs rounded-xl shadow cursor-pointer transition";
+                document.getElementById('tabCalcBtn').setAttribute('aria-selected','true');
+                document.getElementById('sectionCalc').setAttribute('aria-hidden','false');
+                document.getElementById('sectionAge').setAttribute('aria-hidden','true');
+                document.getElementById('sectionCurr').setAttribute('aria-hidden','true');
+            } else if(tab === 'age') {
+                document.getElementById('sectionAge').classList.remove('hidden');
+                document.getElementById('tabAgeBtn').className = "py-2 bg-indigo-600 text-white font-bold text-xs rounded-xl shadow cursor-pointer transition";
+                document.getElementById('tabAgeBtn').setAttribute('aria-selected','true');
+                document.getElementById('sectionAge').setAttribute('aria-hidden','false');
+                document.getElementById('sectionCalc').setAttribute('aria-hidden','true');
+                document.getElementById('sectionCurr').setAttribute('aria-hidden','true');
+            } else if(tab === 'curr') {
+                document.getElementById('sectionCurr').classList.remove('hidden');
+                document.getElementById('tabCurrBtn').className = "py-2 bg-indigo-600 text-white font-bold text-xs rounded-xl shadow cursor-pointer transition";
+                document.getElementById('tabCurrBtn').setAttribute('aria-selected','true');
+                document.getElementById('sectionCurr').setAttribute('aria-hidden','false');
+                document.getElementById('sectionCalc').setAttribute('aria-hidden','true');
+                document.getElementById('sectionAge').setAttribute('aria-hidden','true');
+                fetchLiveRates();
+            }
+        }
+
+        // initial default
+        switchTab('calc');
+
+        let calcInput = "";
+        const screen = document.getElementById('calcScreen');
+
+        function appendVal(val) {
+            // normalize multiplication/division symbols to ascii
+            if (val === '×') val = '*';
+            if (val === '÷') val = '/';
+            calcInput += val;
+            screen.innerText = calcInput || "0";
+        }
+
+        function clearCalc() {
+            calcInput = "";
+            screen.innerText = "0";
+        }
+
+        function backspace() {
+            calcInput = calcInput.slice(0, -1);
+            screen.innerText = calcInput || "0";
+        }
+
+        // Safer evaluation: only allow known function names and characters, evaluate in a minimal sandbox
+        function calculateResult() {
+            try {
+                if(!calcInput) return;
+
+                // normalize symbols
+                let formatted = calcInput.replace(/÷/g,'/').replace(/×/g,'*');
+
+                // Only allow a limited set of characters (digits, operators, parentheses, dots, letters, commas, spaces)
+                if (/[^0-9+\-*/()., \t\nA-Za-z]/.test(formatted)) throw new Error('Invalid characters');
+
+                // Collect identifiers and ensure they are in the white-list
+                const ids = (formatted.match(/[A-Za-z_]\w*/g) || []).filter(Boolean);
+                const allowed = new Set(['sin','cos','tan','sqrt','pow','PI']);
+                for(const id of ids) {
+                    if(!allowed.has(id)) {
+                        throw new Error('Invalid identifier: ' + id);
+                    }
+                }
+
+                // Use degree-based wrappers for sin/cos/tan
+                const sin_deg = v => Math.sin((+v) * Math.PI / 180);
+                const cos_deg = v => Math.cos((+v) * Math.PI / 180);
+                const tan_deg = v => Math.tan((+v) * Math.PI / 180);
+
+                // Build a Function that only receives the allowed functions/constants as parameters.
+                // This prevents access to globals like window or console via parameter shadowing.
+                const evaluator = new Function('sin','cos','tan','sqrt','pow','PI','return (' + formatted + ');');
+
+                const result = evaluator(sin_deg, cos_deg, tan_deg, Math.sqrt, Math.pow, Math.PI);
+
+                if (typeof result === 'number' && !Number.isFinite(result)) throw new Error('Math error');
+
+                // Format the result sensibly
+                const out = (typeof result === 'number') ? (Math.round(result * 1e12) / 1e12) : result;
+                screen.innerText = String(out);
+                calcInput = String(out);
+            } catch (e) {
+                screen.innerText = "Error";
+                calcInput = "";
+                // Optionally you can console.error(e) during development
+            }
+        }
+
+        function calculateAge() {
+            const dob = document.getElementById('dobInput').value;
+            if(!dob) { alert("Please select your date of birth!"); return; }
+
+            const birthDate = new Date(dob);
+            const today = new Date();
+
+            let years = today.getFullYear() - birthDate.getFullYear();
+            let months = today.getMonth() - birthDate.getMonth();
+            let days = today.getDate() - birthDate.getDate();
+
+            if (days < 0) {
+                months--;
+                // days in previous month relative to 'today'
+                const daysInPrevMonth = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+                days += daysInPrevMonth;
+            }
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            document.getElementById('ageResultBox').classList.remove('hidden');
+            document.getElementById('ageOutput').innerText = `${years} Years, ${months} Months, ${days} Days`;
+        }
+
+        async function fetchLiveRates() {
+            try {
+                // Note: some public endpoints may require CORS allowances or API keys.
+                // exchangerate-api.com free endpoint sometimes changes; replace with a preferred provider if needed.
+                const res = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+                if (!res.ok) throw new Error('Network response not ok');
+                const data = await res.json();
+
+                const inrRate = data.rates && data.rates.INR;
+                const eurRate = data.rates && data.rates.EUR;
+                const gbpRate = data.rates && data.rates.GBP;
+
+                if (!inrRate || !eurRate || !gbpRate) throw new Error('Missing rate data');
+
+                document.getElementById('rateUSD').innerText = `₹${inrRate.toFixed(2)}`;
+                document.getElementById('rateEUR').innerText = `₹${(inrRate / eurRate).toFixed(2)}`;
+                document.getElementById('rateGBP').innerText = `₹${(inrRate / gbpRate).toFixed(2)}`;
+            } catch(e) {
+                // Fallback approximations
+                document.getElementById('rateUSD').innerText = "₹83.50 (Approx)";
+                document.getElementById('rateEUR').innerText = "₹90.20 (Approx)";
+                document.getElementById('rateGBP').innerText = "₹105.40 (Approx)";
+            }
+        }
+
+        // Basic keyboard support for calculator
+        document.addEventListener('keydown', (e) => {
+            const key = e.key;
+            // Accept digits, operators, parentheses, decimal point
+            if (/^[0-9+\-*/().]$/.test(key)) {
+                appendVal(key);
+                e.preventDefault();
+            } else if (key === 'Enter') {
+                calculateResult();
+                e.preventDefault();
+            } else if (key === 'Backspace') {
+                backspace();
+                e.preventDefault();
+            } else if (key === 'Escape') {
+                clearCalc();
+                e.preventDefault();
+            }
+            // allow other keys normally
+        });
+    </script>
+</body>
+</html>
