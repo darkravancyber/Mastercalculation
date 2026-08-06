@@ -6,7 +6,7 @@
   "display": "standalone",
   "background_color": "#4e3434",
   "theme_color": "#000000",
-  "description": "All-in-One Master Calculation App with Scientific Calc, Age &amp; Currency Tracker",
+  "description": "All-in-One Master Calculation App with Scientific Calc, Age & Currency Tracker",
   "orientation": "portrait",
   "categories": [
     "utilities",
@@ -14,5 +14,19 @@
     "productivity"
   ],
   "lang": "en",
-  "id": "SSKmastercolculate"
+  "id": "SSKmastercolculate",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/darkravancyber/Mastercalculation/main/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/darkravancyber/Mastercalculation/main/icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
 }
