@@ -1,0 +1,16 @@
+{
+  "name": "All-in-One Master Calculation App",
+  "short_name": "Master Calc",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "description": "All-in-One Master Calculation App with Scientific Calc, Age & Currency Tracker",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
