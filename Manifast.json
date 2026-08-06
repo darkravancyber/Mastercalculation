@@ -1,0 +1,12 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "darkravancyber.github",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "darkravancyber.github",
+  "start_url": "/",
+  "theme_color": "#ffffff"
+}
+
