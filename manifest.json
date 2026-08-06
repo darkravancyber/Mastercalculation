@@ -6,15 +6,8 @@
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
-  "description": "All-in-One Master Calculation App with Scientific Calc, Age & Currency Tracker",
+  "description": "All-in-One Master Calculation App with Scientific Calc, Age &amp; Currency Tracker",
   "orientation": "portrait",
-  "icons": [
-    {
-      "src": "https://raw.githubusercontent.com/darkravancyber/Mastercalculation/main/index.html",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ],
   "categories": [
     "utilities",
     "finance",
